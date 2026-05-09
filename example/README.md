@@ -1,4 +1,4 @@
-# JL DeskLock
+# examplePlugin
 
 这是由 MA3 Lua Plugin Scaffold 生成的插件项目。默认入口是一个可运行的 **Hello MA3** 示例。
 
@@ -13,15 +13,15 @@ python3 tools/build.py
 默认构建模式是 `installed`，会生成并复制两个文件到 MA3 插件库：
 
 ```text
-~/MALightingTechnology/gma3_library/datapools/plugins/jl_desklock/DeskLock.xml
-~/MALightingTechnology/gma3_library/datapools/plugins/jl_desklock/DeskLock.lua
+~/MALightingTechnology/gma3_library/datapools/plugins/hello ma3/example.xml
+~/MALightingTechnology/gma3_library/datapools/plugins/hello ma3/example.lua
 ```
 
 同时会生成本地备份：
 
 ```text
-dist/DeskLock.xml
-dist/DeskLock.lua
+dist/example.xml
+dist/example.lua
 ```
 
 只生成本地文件，不写入 MA3：
@@ -41,14 +41,14 @@ python3 tools/build.py --xml-mode embedded
 在 MA3 命令行执行：
 
 ```text
-Import "jl_desklock/DeskLock.xml" At Plugin 1 /NoConfirmation
+Import "hello ma3/example.xml" At Plugin 1 /NoConfirmation
 Call Plugin 1
 ```
 
 成功时，System Monitor 里应该看到：
 
 ```text
-[JL DeskLock] Hello MA3!
+[examplePlugin] Hello MA3!
 ```
 
 ## 3. 日常开发

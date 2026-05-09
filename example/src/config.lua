@@ -1,8 +1,8 @@
 local Config = {}
 
 Config.plugin = {
-    name = "DeskLock",
-    displayName = "JL DeskLock",
+    name = "example",
+    displayName = "examplePlugin",
     version = "0.1.0",
 }
 

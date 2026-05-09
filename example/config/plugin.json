@@ -1,8 +1,8 @@
 {
-  "name": "DeskLock",
-  "displayName": "JL DeskLock",
+  "name": "example",
+  "displayName": "examplePlugin",
   "version": "0.1.0",
-  "author": "JL",
+  "author": "sujlin",
   "entryModule": "src.main_entry",
   "sourceRoots": [
     "src",
@@ -15,26 +15,26 @@
     "entryMode": "inline"
   },
   "ma3": {
-    "pluginSubdir": "jl_desklock",
-    "outputFile": "DeskLock.lua",
-    "componentFileName": "DeskLock.lua",
-    "componentFilePath": "jl_desklock",
+    "pluginSubdir": "hello ma3",
+    "outputFile": "example.lua",
+    "componentFileName": "example.lua",
+    "componentFilePath": "hello ma3",
     "installed": true,
     "version": "auto",
     "target": "internal",
     "xmlMode": "installed",
-    "xmlFile": "DeskLock.xml",
-    "luaFile": "DeskLock.lua",
+    "xmlFile": "example.xml",
+    "luaFile": "example.lua",
     "dataVersion": "2.3.2.0"
   },
-  "localOutput": "dist/DeskLock.lua",
-  "xmlOutput": "dist/DeskLock.xml",
+  "localOutput": "dist/example.lua",
+  "xmlOutput": "dist/example.xml",
   "assets": {
     "images": [
       {
-        "name": "DeskLock_Icon",
+        "name": "example_Icon",
         "file": "assets/images/plugin_icon.png",
-        "appearanceName": "JL DeskLock Icon",
+        "appearanceName": "examplePlugin Icon",
         "useAsPluginAppearance": true,
         "imageMode": "Crop",
         "backColor": {
@@ -45,9 +45,9 @@
         }
       },
       {
-        "name": "DeskLock_LockScreen",
+        "name": "example_LockScreen",
         "file": "assets/images/lock_screen.png",
-        "appearanceName": "JL DeskLock Lock Screen",
+        "appearanceName": "examplePlugin Lock Screen",
         "useAsPluginAppearance": false,
         "imageMode": "Stretch",
         "backColor": {
