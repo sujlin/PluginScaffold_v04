@@ -1,0 +1,62 @@
+{
+  "name": "{{PLUGIN_NAME}}",
+  "displayName": "{{DISPLAY_NAME}}",
+  "version": "0.1.0",
+  "author": "{{AUTHOR}}",
+  "entryModule": "src.main_entry",
+  "sourceRoots": [
+    "src",
+    "ma3lib",
+    "vendor"
+  ],
+  "manualDependencies": [],
+  "externalDependencies": [],
+  "bundle": {
+    "entryMode": "inline"
+  },
+  "ma3": {
+    "pluginSubdir": "{{PLUGIN_SUBDIR}}",
+    "outputFile": "{{PLUGIN_NAME}}.lua",
+    "componentFileName": "{{PLUGIN_NAME}}.lua",
+    "componentFilePath": "{{PLUGIN_SUBDIR}}",
+    "installed": true,
+    "version": "auto",
+    "target": "internal",
+    "xmlMode": "installed",
+    "xmlFile": "{{PLUGIN_NAME}}.xml",
+    "luaFile": "{{PLUGIN_NAME}}.lua",
+    "dataVersion": "2.3.2.0"
+  },
+  "localOutput": "dist/{{PLUGIN_NAME}}.lua",
+  "xmlOutput": "dist/{{PLUGIN_NAME}}.xml",
+  "assets": {
+    "images": [
+      {
+        "name": "{{PLUGIN_NAME}}_Icon",
+        "file": "assets/images/plugin_icon.png",
+        "appearanceName": "{{DISPLAY_NAME}} Icon",
+        "useAsPluginAppearance": true,
+        "imageMode": "Crop",
+        "backColor": {
+          "r": 25,
+          "g": 25,
+          "b": 30,
+          "alpha": 255
+        }
+      },
+      {
+        "name": "{{PLUGIN_NAME}}_LockScreen",
+        "file": "assets/images/lock_screen.png",
+        "appearanceName": "{{DISPLAY_NAME}} Lock Screen",
+        "useAsPluginAppearance": false,
+        "imageMode": "Stretch",
+        "backColor": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "alpha": 255
+        }
+      }
+    ]
+  }
+}
