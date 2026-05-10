@@ -423,6 +423,49 @@ def normalize_asset_image(project_root: Path, item: object, index: int, config: 
     if not isinstance(item, dict):
         raise BuildError(f"assets.images[{index}] must be an object or string path")
 
+    # 文件路径
+    raw_file = item.get("file") or item.get("path")
+    file_path = (project_root / str(raw_file)).resolve()
+    if not file_path.exists() or not file_path.is_file():
+        raise BuildError(f"Image asset not found: {file_path}")
+
+    # 获取模板占位符实际值
+    plugin_name = str(config.get("name") or "Plugin")
+    display_name = str(config.get("displayName") or plugin_name)
+
+    base_name = file_path.stem
+    image_name = str(item.get("name") or f"{plugin_name}_{base_name}")
+    appearance_name = str(item.get("appearanceName") or item.get("appearance") or image_name)
+
+    # 替换占位符
+    image_name = image_name.replace("{{PLUGIN_NAME}}", plugin_name).replace("{{DISPLAY_NAME}}", display_name)
+    appearance_name = appearance_name.replace("{{PLUGIN_NAME}}", plugin_name).replace("{{DISPLAY_NAME}}", display_name)
+
+    image_mode = str(item.get("imageMode") or "Crop")
+    use_as_plugin_appearance = bool_from_config(
+        item.get("useAsPluginAppearance", item.get("asPluginAppearance", item.get("pluginIcon"))),
+        default=(index == 0),
+    )
+    back = item.get("backColor") if isinstance(item.get("backColor"), dict) else {}
+
+    return ImageAsset(
+        name=image_name,
+        file=file_path,
+        relfile=file_path.relative_to(project_root).as_posix(),
+        filename=str(item.get("fileName") or file_path.name),
+        appearance_name=appearance_name,
+        image_mode=image_mode,
+        use_as_plugin_appearance=use_as_plugin_appearance,
+        back_r=clamp_color(item.get("backR", back.get("r", 0)), 0),
+        back_g=clamp_color(item.get("backG", back.get("g", 0)), 0),
+        back_b=clamp_color(item.get("backB", back.get("b", 0)), 0),
+        back_alpha=clamp_color(item.get("backAlpha", back.get("alpha", 255)), 255),
+    )
+    if isinstance(item, str):
+        item = {"file": item}
+    if not isinstance(item, dict):
+        raise BuildError(f"assets.images[{index}] must be an object or string path")
+
     raw_file = item.get("file") or item.get("path")
     if not raw_file:
         raise BuildError(f"assets.images[{index}] is missing file")
