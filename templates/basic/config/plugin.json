@@ -1,5 +1,5 @@
 {
-  "scaffoldVersion": "0.4.0",
+  "scaffoldVersion": "0.4.1",
   "name": "{{PLUGIN_NAME}}",
   "displayName": "{{DISPLAY_NAME}}",
   "version": "0.1.0",
