@@ -52,7 +52,7 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Create a new MA3 Lua plugin project.")
     parser.add_argument("name", help="Plugin project name, e.g. DeskLock")
     parser.add_argument("--display-name", help="MA3 display name, defaults to name")
-    parser.add_argument("--author", default="JL", help="Author name")
+    parser.add_argument("--author", default="Sujlin", help="Author name")
     parser.add_argument("--plugin-subdir", help="MA3 lib_plugins subdir, defaults to jl_<snake_name>")
     parser.add_argument("--template", default="basic", help="Template name")
     parser.add_argument("--output", default=".", help="Parent output directory")
