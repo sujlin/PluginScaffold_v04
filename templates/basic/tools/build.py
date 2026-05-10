@@ -170,17 +170,27 @@ def module_to_relative_path(module: str) -> Path:
 
 
 def resolve_module_to_file(project_root: Path, source_roots: Sequence[str], module: str) -> Path:
-    root_name = module.split(".", 1)[0]
-    if root_name not in source_roots:
-        raise BuildError(
-            f"Module {module!r} is outside sourceRoots {list(source_roots)!r}. "
-            "Add it to sourceRoots, vendor it, or list it in externalDependencies."
-        )
-    path = project_root / module_to_relative_path(module)
-    if not path.exists():
-        raise BuildError(f"Module {module!r} not found at {path}")
-    return path
+    rel_path = module_to_relative_path(module)
 
+    candidates = []
+    for root in source_roots:
+        candidate = project_root / root / rel_path
+        candidates.append(candidate)
+        if candidate.exists():
+            return candidate
+
+    # 兼容旧写法：require("src.xxx") / require("ma3lib.xxx") / require("vendor.xxx")
+    root_name = module.split(".", 1)[0]
+    if root_name in source_roots:
+        legacy_path = project_root / module_to_relative_path(module)
+        if legacy_path.exists():
+            return legacy_path
+
+    searched = "\n".join(f"  - {p}" for p in candidates)
+    raise BuildError(
+        f"Module {module!r} not found in sourceRoots {list(source_roots)!r}.\n"
+        f"Searched:\n{searched}"
+    )
 
 def strip_lua_comments_for_require_scan(code: str) -> str:
     # Conservative scanner aid. It is not a full Lua parser, but prevents most
@@ -438,8 +448,8 @@ def normalize_asset_image(project_root: Path, item: object, index: int, config: 
     appearance_name = str(item.get("appearanceName") or item.get("appearance") or image_name)
 
     # 替换占位符
-    image_name = image_name.replace("{{PLUGIN_NAME}}", plugin_name).replace("{{DISPLAY_NAME}}", display_name)
-    appearance_name = appearance_name.replace("{{PLUGIN_NAME}}", plugin_name).replace("{{DISPLAY_NAME}}", display_name)
+    image_name = image_name.replace("exampleplugin", plugin_name).replace("exampleplugin", display_name)
+    appearance_name = appearance_name.replace("exampleplugin", plugin_name).replace("exampleplugin", display_name)
 
     image_mode = str(item.get("imageMode") or "Crop")
     use_as_plugin_appearance = bool_from_config(
