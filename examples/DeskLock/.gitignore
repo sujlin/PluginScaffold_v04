@@ -1,5 +1,0 @@
-build/
-dist/*.tmp.lua
-__pycache__/
-*.pyc
-.DS_Store
